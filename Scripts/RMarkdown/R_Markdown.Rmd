@@ -1,0 +1,40 @@
+---
+title: "R Markdown"
+author: "SZL"
+date: '2022-03-28'
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Titulo principal
+**Negrilla**
+*Italica*
+
+## Subtitulo
+Se debe dejar un espacio para que el cse identifique el titulo
+
+### Subsubtitulo
+
+
+```{r codigo}
+## Se aniade con Ctrl+Alt+I
+#Se corre con Ctrl+Enter por linea o todo el bloque de codigo con Ctrl+Shift+Enter
+print("Hola mundo")
+```
+
+## Outputs sin comandos
+
+Se aniade la linea ,echo=False dentro de las llaves que generan el bloque de codigo
+
+```{r print, echo=FALSE}
+print("Hola mundo sin visualizar sus comandos")
+```
+
+Finalmente, listas:   
+
+- Elemento de lista 1  
+- Elemento de lista 2  
+Los dosbles espacios al final de cada linea permiten pasar de renglon al compilar.
