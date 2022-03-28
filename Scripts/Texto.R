@@ -1,2 +1,0 @@
-print("Texto de prueba")
-
