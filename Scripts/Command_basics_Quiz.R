@@ -3,6 +3,9 @@ dim(data) # Da dimensiones del DF
 names(data) # Nombre de las variables
 View(data)# Visualiza datos
 ##--
+n <- nrow(data) # Cuenta  numro de filas
+last=test[(n - 6 + 1):n, ] # Extrae ultimas seis columnas
+##--
 sum(is.na(data$Ozone)) # Da numero de NA en columna Ozone
 ##--
 sol<-subset(data, Ozone>31 & Temp>90) #Crear sub DF según condiciones
