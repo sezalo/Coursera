@@ -1,4 +1,4 @@
-data<-read.csv("C:/Users/szapatal/Documents/RStudio/Coursera/Scripts/hw1_data.csv")#Lee hw1_data
+data<-read.csv("C:/Users/szapatal/Documents/RStudio/Coursera/Scripts/Command_basics_data.csv")#Lee hw1_data
 dim(data) # Da dimensiones del DF 
 names(data) # Nombre de las variables
 View(data)# Visualiza datos
