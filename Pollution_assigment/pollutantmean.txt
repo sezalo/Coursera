@@ -1,0 +1,29 @@
+
+¡OJO!La solución puede ser que cuando se llama el valor de una tabla por el nombre de su columna, se hace con doble corchete datos[["sulfate"]]
+rm(list = ls())
+library("data.table")#install.packages("data.table")
+
+## Crea directorio
+directorio<-getwd( ) 
+directorio<-paste0(directorio,"/Pollution assigment/specdata/")
+
+pollutantmean <-function(directory,pollutant,id=1:332){
+   
+   #Crea rutas de los archivos. paste0 evita añadir collapse="" en paste. Format C añade 0 de archivos
+    rutas<-paste0(directory,formatC(id,width = 3,flag = 0),".csv")
+    #lapply aplica funcion a elementos de una lista para evitar loops con for. data.table genera listas y se reunen con
+    #fread; una aplicación que optimiza la lectura de csv.
+    datos<-lapply(rutas,data.table::fread) #Lista de listas
+    datos <<- rbindlist(datos) #Une las listas en una lista #Doble menor lo envía a enviroment
+
+    if (pollutant=="sulfate"){
+      #prom<<-mean(datos$sulfate , na.rm = TRUE)
+      a<-na.omit(datos$sulfate)
+      mean(a)
+    } 
+    else if(pollutant=="nitrate"){
+      #prom<<-mean(datos$nitrate , na.rm = TRUE)
+    }
+}
+
+pollutantmean(directorio,"sulfate",1:3)
