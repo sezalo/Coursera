@@ -1,7 +1,7 @@
 cat("\014") 
 rm(list = ls())
 ## Funciones iterativas o loops
-# lapplyy recibe una lista, aplica funcion a cada elemento de la lista y devuelve lista de resultados
+# lapplyy recibe una lista, aplica funcion a cada fila de la lista y devuelve lista de resultados. Si es un DF lo aplica a cada columna
 x <- list(a = 1:5, b = rnorm(10)) 
 y<-lapply(x, mean)
 z<-y[1] #Extrae elemento de la lista como otra lista
@@ -13,7 +13,7 @@ lapply(x, runif, min = 0, max = 10)
 
 # lapply puede hacer uso de funciones anonimas
 x <- list(a = matrix(1:4, 2, 2), b = matrix(1:6, 3, 2)) 
-lapply(x, function(elt) elt[,1]) #Se usan anonimas cuando no se trabaja vectores sino matrices o DF
+lapply(x, function(y) y[,1]) #Se usan anonimas para evitar loops y no hay funcion definida, i.e devuelve primer elemento de una fila
 
 #sapply simplifica resultados de lapply, buscando no entregar listas de ser posible sino vectores, matrices 
 x <- list(a = 1:4, b = rnorm(10), c = rnorm(20, 1), d = rnorm(100, 5))
@@ -46,7 +46,7 @@ mapply(noise, 1:5, 1:5, 2) #Da el resultado deseado. 1 dato con media 1, 2 datos
 
 ## Aplica una funcion sobre un subset de vectores, simplifica en vectores y matrices. Sino devuelve lista 
 x<-c(rnorm(10), runif(10), rnorm(10, 1))
-f <- gl(3, 10)
+f <- gl(3, 10) #vector de 3x10 columnas donde rpite diez veces 1, 1o veces 2 y 10 veces 3. (subniveles)
 tapply(x, f, mean) #Devuelve media de los datos de x en grupos segun indica el número del factor f.
 
 
@@ -68,3 +68,5 @@ lapply(s, function(x) colMeans(c("Ozone", "Solar.R", "Wind")))
 sapply(s, function(x) colMeans(x[, c("Ozone", "Solar.R", "Wind")])) #Entrega lo de sapply pero organizado en matriz
 sapply(s, function(x) colMeans(x[, c("Ozone", "Solar.R", "Wind")],
                                na.rm = TRUE)) #Omite los NA
+
+# vapply(flags, unique, numeric(1)) # es como lapply y sapply pero se le indica el formato de salida y longitud esperado para el resultado
