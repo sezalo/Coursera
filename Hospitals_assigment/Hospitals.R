@@ -8,7 +8,7 @@ directorio<-getwd( )
 outcome_path<-paste0(directorio,"/Hospitals_assigment/outcome-of-care-measures.csv")
 hospitals_path<-paste0(directorio,"/Hospitals_assigment/hospital-data.csv")
 outcome <- read.csv(outcome_path)
-hospitals<-read.csv(hospitals_path)
+#hospitals_info<-read.csv(hospitals_path)
 
 
 
@@ -80,21 +80,27 @@ rankhospital<-function(state= character(),disease=character(),num="best"){
   ratas<-ratas[!is.na(ratas[,disease]),] #Elimina los NA
   
   #Convierte la entrada de posicion a numerica y evalua si la posicion es valida
-  #num<-rank
   if(num == "best") {
     num <- 1 
   }
   
   if (num == "worst") {
     num <- nrow(ratas)
-    #num<<-rank
   }
   
-  #if (length(ratas[,1])<rank){
-  #  return(NA)
-  #}
-
   ratas<-ratas[order(ratas[, disease]), ] #Organiza por orden, arriba quedan los puntajes mas bajas pero mejores
   ratas[num,1] #Obtiene el hospital en la posicion
-  
 }
+#best("TX", "heart attack")
+#best("MD", "pneumonia")
+
+rankall<-function(disease=character(),num="best"){
+  Hlist <- data.frame()
+  
+  for (i in sort(unique(outcome[,"State"]))){
+  Hospital<-rankhospital(i,disease,num)
+  Hlist<- rbind(Hlist,data.frame(hospital = Hospital,state = i))
+  }
+  Hlist
+}
+#rankall("heart attack", 20)
