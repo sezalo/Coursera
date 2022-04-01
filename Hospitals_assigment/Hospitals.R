@@ -54,7 +54,7 @@ best<-function(state= character(),disease=character()){
 
 
 ## OBTIENE EL HOSPITAL EN DETERMINADA POSICION DEL RANKING
-rankhospital<-function(state= character(),disease=character(),rank="best"){
+rankhospital<-function(state= character(),disease=character(),num="best"){
   
   #Datos de interes
   ratas <- as.data.frame(cbind(outcome[, 2],  # hospital 
@@ -80,21 +80,21 @@ rankhospital<-function(state= character(),disease=character(),rank="best"){
   ratas<-ratas[!is.na(ratas[,disease]),] #Elimina los NA
   
   #Convierte la entrada de posicion a numerica y evalua si la posicion es valida
-  num<-rank
-  if(rank == "best") {
+  #num<-rank
+  if(num == "best") {
     num <- 1 
   }
   
-  if (rank == "worst") {
-    num <<- length(ratas[,1])
+  if (num == "worst") {
+    num <- nrow(ratas)
     #num<<-rank
   }
   
-  if (length(ratas[,1])<rank){
-    return(NA)
-  }
+  #if (length(ratas[,1])<rank){
+  #  return(NA)
+  #}
 
-  ratas<<-ratas[order(ratas[, disease]), ] #Organiza por orden, arriba quedan los puntajes mas bajas pero mejores
+  ratas<-ratas[order(ratas[, disease]), ] #Organiza por orden, arriba quedan los puntajes mas bajas pero mejores
   ratas[num,1] #Obtiene el hospital en la posicion
   
 }
