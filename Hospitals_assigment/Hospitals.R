@@ -85,7 +85,7 @@ rankhospital<-function(state= character(),disease=character(),num="best"){
   }
   
   if (num == "worst") {
-    num <- nrow(ratas)
+    num <- length(ratas[,1])
   }
   
   ratas<-ratas[order(ratas[, disease]), ] #Organiza por orden, arriba quedan los puntajes mas bajas pero mejores
