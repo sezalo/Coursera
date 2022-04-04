@@ -13,3 +13,4 @@ xyear<-tapply(NEI$Emissions,NEI$year,sum) #Suma las emisiones por año
 
 ##PLOTEA
 barplot(xyear,main="Total emision per year",xlab="Year", ylab="Total emissions [Ton]")
+#plot(xyear,main="Total emision per year",xlab="Year", ylab="Total emissions [Ton]")
