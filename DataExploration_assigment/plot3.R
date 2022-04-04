@@ -1,6 +1,7 @@
 rm(list = ls())
 cat("\014") 
 
+library(ggplot2)
 ##CARGA DATOS
 directorio<-getwd()
 directorio<-paste0(directorio,"/DataExploration_assigment") #Establece el directorio
@@ -10,7 +11,10 @@ SCC <- readRDS(rutas[1])
 
 ##SELECCIONA DATOS
 BaltData<-subset(NEI,fips=="24510")#BaltaData<-NEI[NEI$fips=="24510",] 
-xyear<-tapply(BaltData$Emissions,BaltData$year,sum)
- 
-##GRAFICA
-barplot(xyear,main="Baltimore´s total emision per year",xlab="Year", ylab="Total emissions [Ton]")
+r2plot<- aggregate(Emissions ~ year + type, BaltData, sum) #Suma emisiones por año y tipo de BaltData
+
+##Grafica
+g <- ggplot(r2plot, aes(year, Emissions, color = type))
+g + geom_line() + xlab("Year") + ylab(expression("Total PM"[2.5]*" Emissions [Ton]")) +
+  ggtitle("Year total emissions per type in Baltimore")
+
