@@ -7,7 +7,7 @@ output: pdf_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-### Instructions
+### INSTRUCTION
 1. Show the sample mean and compare it to the theoretical mean of the distribution.
 2. Show how variable the sample is (via variance) and compare it to the theoretical variance of the distribution.
 3. Show that the distribution is approximately normal.
@@ -19,7 +19,7 @@ rm(list = ls())
 cat("\014") 
 ```
 
-## Solution 
+## SOLUTION
 
 We first make 1000 simulations of 40 sambles each following a exponential probability distribution with $\lambda=0.2$ as follows.
 ```{r OBTAINING DATA}
@@ -32,7 +32,7 @@ nsim <- 1000 # number of simulations
 sim_exp <- replicate(nsim, rexp(nsam, lambda)) # simulates the exponentials, used replicate instead of apply along a 1:nsim vector and reshaping in a matrix.
 exp_means <- apply(sim_exp, 2, mean) # calculates the means of exponentials by columns of nsam data
 ```
-### Question 1
+### QUESTION 1
 We manage to calculate both theoretical and analytical distributions.
 ```{r MEAN COMPARISON}
 analytical_mean <- mean(exp_means) #As mean is a lineal operation
@@ -49,7 +49,7 @@ abline(v = analytical_mean, col = "red",lty="dashed")
 abline(v = theoretical_mean, col = "blue")
 ```
  As we expected, the center of distribution of the 40 exponental samples averages is very close to the theoretical center of the distribution.
-### Question 2
+### QUESTION 2
 We want to show how variable are the sample means and compare them with the theoretical variance of the distribution. So we calculate them. 
 ```{r VAR COMPARISON}
 analytical_sd <- sd(exp_means)# standard deviation of distribution
@@ -65,7 +65,7 @@ theoretical_var <-theoretical_sd^2 # variance of distribution
 theoretical_var
 ```
 This show that both sample standard deviation and and variance (respectively 0.7982937 &  0.6372728) are quite close to the theoretical ones (respectively 0.7905694 & 0.625).
-### Question 3
+### QUESTION 3
 Show that the distribution is approximately normal.
 ```{r}
 x_val <- seq(min(exp_means), max(exp_means), length=50) # Secuence of equidistant values
@@ -73,7 +73,7 @@ y_val <- dnorm(x_val, mean=theoretical_mean, sd=theoretical_sd)
 hist(exp_means,breaks=50,prob=T,col="grey",xlab = "means",main="Density of means",ylab="frequency")
 lines(x_val, y_val, pch=22, col="black", lty=5)
 ```
-As the above figure shows, the distribution of means of the sampled exponential distributions appear to follow a normal distribution. This is due to the Central Limit Theorem. It is noteworthy that increasing the number of samples from 1000, would cause the distribution to align even more closely to a normal distribution.  Also, due to the central limit theorem (CLT), the distribution of averages of 40 exponentials is very close to a normal distribution (As shows in Index A.
+As the above figure shows, the distribution of means of the sampled exponential distributions appear to follow a normal distribution. This is due to the Central Limit Theorem. It is noteworthy that increasing the number of samples from 1000, would cause the distribution to align even more closely to a normal distribution.  Also, due to the central limit theorem (CLT), the distribution of averages of 40 exponentials is very close to a normal distribution (As shows in Appendix A.
 \
 \
 \
@@ -82,7 +82,7 @@ As the above figure shows, the distribution of means of the sampled exponential 
 \
 
 
-# INDEX A
+# APPENDIX A
 ```{r QUANTILE COMPARISON}
 
 qqnorm(exp_means) # compare the distribution of averages of 40 exponentials to a normal distribution
