@@ -73,11 +73,8 @@ One can conclude:
 \
 \
 \
-\
-\
-\
-\
-# APPENDIX A
+
+# APPENDIX A 
 ```{r APPENDIX A ,  echo=FALSE }
 head(ToothGrowth)
 tail(ToothGrowth)
