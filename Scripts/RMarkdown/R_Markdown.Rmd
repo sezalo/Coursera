@@ -9,7 +9,7 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Titulo principal
+# Titulo principal
 **Negrilla**
 *Italica*
 
