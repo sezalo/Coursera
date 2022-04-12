@@ -14,7 +14,7 @@ pollutantmean <-function(directory,pollutant,id=1:332){  #Promedio de contaminac
     #yData<- data.frame(matrix(nrow = 0, ncol = length(b)))
     #colnames(yData) = b
     # alocar el siguiente codigo dentro de este ciclo u<-merge(u,data,all.x = TRUE)
-    values<-c(values,data[[pollutant]])
+    values<--c(values,data[[pollutant]])
   }
   resultado1<<-mean(values,na.rm = TRUE)
 }
