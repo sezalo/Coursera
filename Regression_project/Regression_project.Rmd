@@ -1,0 +1,33 @@
+---
+title: "RegressionProject"
+author: "Sebastián ZL"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+rm(list = ls())
+cat("\014") 
+library(datasets)
+data(mtcars)
+```
+# Executive summary 
+
+This project aims to explore some features that affect fuel consumption in miles per gallon (MPG)  based on a  collection of cars (mtcars -  Motor Trend Car Road Tests) data set. In particularly we want answer two questions:
+- Is an automatic or manual transmission better for MPG?
+- Quantifying how different is the MPG between automatic and manual transmissions?
+## Exploratory data analysis 
+
+
+```{r Resumen y graficos, echo=FALSE}
+str(mtcars) #Resumen
+
+mtcars$am.label <- factor(mtcars$am, labels=c("Automatic","Manual")) # 0=automatico, 1=manual Añade un label a la entrada variable de interés.
+
+boxplot(mpg~am.label, data=mtcars, col="grey", ylab="Miles per gallon", xlab = "Transmission type", main="Miles per gallon by transmission type")
+````
+We proceed to see if theres a significant difference between average miles per galon beetwen the transmission type. 
+````{r t-Test, echo=FALSE}
+https://rpubs.com/RichFlorez/228366
+```
