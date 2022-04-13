@@ -14,11 +14,11 @@ data(mtcars)
 ```
 # Executive summary 
 
-This project aims to explore some features that affect fuel consumption in miles per gallon (MPG)  based on a  collection of cars (mtcars -  Motor Trend Car Road Tests) data set. In particularly we want answer two questions:
+This project aims to explore some features that affect fuel consumption in miles per gallon (MPG)  based on a  collection of cars (mtcars -  Motor Trend Car Road Tests) data set. This because Motor Trend Magazine is interested in exploring the relationship between a set of variables and miles per gallon (MPG). They are particularly interested in the following two questions:
 - Is an automatic or manual transmission better for MPG?
 - Quantifying how different is the MPG between automatic and manual transmissions?
-## Exploratory data analysis 
 
+## Exploratory data analysis 
 
 ```{r Resumen y graficos, echo=FALSE}
 str(mtcars) #Resumen
@@ -26,8 +26,18 @@ str(mtcars) #Resumen
 mtcars$am.label <- factor(mtcars$am, labels=c("Automatic","Manual")) # 0=automatico, 1=manual Añade un label a la entrada variable de interés.
 
 boxplot(mpg~am.label, data=mtcars, col="grey", ylab="Miles per gallon", xlab = "Transmission type", main="Miles per gallon by transmission type")
-````
+```
+
 We proceed to see if theres a significant difference between average miles per galon beetwen the transmission type. 
 ````{r t-Test, echo=FALSE}
-https://rpubs.com/RichFlorez/228366
+manu<-subset(mtcars,mtcars$am==1)
+auto<-subset(mtcars,mtcars$am==0)
+test<-t.test(auto$mpg,manu$mpg)
 ```
+As we saw above, for a conventional significance level $\alpha=0.05$ under the null hypothesis of true diffence in means equal to zero, we \textbf{reject} this hypothesis with a p-value of 0.0014. This is also confirmed by the 95% confidence interval of  the means difference [-11.28,-3.20], which is not cointaining zero or near zero values. Now whe can proceed to calculate how different are the autonmyes.
+```{r Linear regression, echo=FALSE}
+fit<-lm(mtcars$mpg~as.factor(mtcars$am))
+summary(fit)
+```
+
+The regression coefficient  \textit{"as.factor(mtcars\$am)1"} tell us that \textvf{manual cars have an 7.245mpg average above the automatica ones.} *** indicates that its p-value its contaiden in \textit{(0,001]} and its a statistically significant predictor. Unfurnately, as $R^2=03598$, only the 36% of the mpg variance its explained by the univariate model.
